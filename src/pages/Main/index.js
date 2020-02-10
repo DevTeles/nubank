@@ -1,59 +1,123 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import { Animated } from 'react-native';
+import { PanGestureHandler, State } from 'react-native-gesture-handler';
+
+import Header from '~/components/Header';
+import Tabs from '~/components/Tabs';
+import Menu from '~/components/Menu';
 
 import {
-  Text, Image, StyleSheet, Dimensions, ImageBackground, StatusBar,
-} from 'react-native';
+  Container,
+  Content,
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  Title,
+  Description,
+  Annotation,
+} from './styles';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-  fileName: {
-    fontWeight: 'bold',
-    marginTop: 5,
-  },
-  instructions: {
-    color: '#DDD',
-    fontSize: 14,
-    marginTop: 20,
-    textAlign: 'center',
-  },
-  logo: {
-    height: Dimensions.get('window').height * 0.11,
-    marginVertical: Dimensions.get('window').height * 0.11,
-    width: Dimensions.get('window').height * 0.11 * (1950 / 662),
-  },
-  welcome: {
-    color: '#fff',
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
+export default function Main() {
+  const [iconVisible, setIconVisible] = useState('visibility-off');
 
-const Main = () => (
-  <ImageBackground
-    source={{
-      uri: 'https://s3-sa-east-1.amazonaws.com/rocketseat-cdn/background.png',
-    }}
-    style={styles.container}
-    resizeMode="cover"
-  >
-    <StatusBar barStyle="light-content" backgroundColor="#7159c1" />
-    <Image
-      source={{
-        uri: 'https://s3-sa-east-1.amazonaws.com/rocketseat-cdn/rocketseat_logo.png',
-      }}
-      style={styles.logo}
-      resizeMode="contain"
-    />
-    <Text style={styles.welcome}>Bem-vindo ao Template Básico!</Text>
-    <Text style={styles.instructions}>Essa é a tela principal da sua aplicação =)</Text>
-    <Text style={styles.instructions}>Você pode editar a tela no arquivo:</Text>
-    <Text style={[styles.instructions, styles.fileName]}>src/pages/Main/index.js</Text>
-  </ImageBackground>
-);
+  let offset = 0;
 
-export default Main;
+  const translateY = new Animated.Value(0);
+
+  const animatedEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          translationY: translateY,
+        },
+      },
+    ],
+    { useNativeDriver: true },
+  );
+
+  function onHandlerStateChange(event) {
+    if (event.nativeEvent.oldState === State.ACTIVE) {
+      let opened = false;
+      const { translationY } = event.nativeEvent;
+
+      offset += translationY;
+
+      if (translationY >= 100) {
+        opened = true;
+      } else {
+        translateY.setValue(offset);
+        translateY.setOffset(0);
+        offset = 0;
+      }
+
+      Animated.timing(translateY, {
+        toValue: opened ? 500 : 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start(() => {
+        offset = opened ? 500 : 0;
+        translateY.setOffset(offset);
+        translateY.setValue(0);
+      });
+    }
+  }
+
+  function handleSaldoVisible() {
+    setIconVisible(
+      iconVisible === 'visibility-off' ? 'visibility' : 'visibility-off',
+    );
+  }
+
+  return (
+    <Container>
+      <Header />
+
+      <Content>
+        <Menu translateY={translateY} />
+
+        <PanGestureHandler
+          onGestureEvent={animatedEvent}
+          onHandlerStateChange={onHandlerStateChange}>
+          <Card
+            style={{
+              transform: [
+                {
+                  translateY: translateY.interpolate({
+                    inputRange: [-350, 0, 500],
+                    outputRange: [-50, 0, 500],
+                    extrapolate: 'clamp',
+                  }),
+                },
+              ],
+            }}>
+            <CardHeader>
+              <Icon name="attach-money" size={28} color="#667" />
+              <Icon
+                name={iconVisible}
+                size={28}
+                color="#667"
+                onPress={handleSaldoVisible}
+              />
+            </CardHeader>
+            <CardContent>
+              <Title>Saldo disponível</Title>
+              <Description iconVisible={iconVisible}>
+                R$ 1.197.611,65
+              </Description>
+            </CardContent>
+            <CardFooter>
+              <Annotation>
+                Transferência de R$ 20,00 recebida de Rafael Teles Vital
+              </Annotation>
+            </CardFooter>
+          </Card>
+        </PanGestureHandler>
+      </Content>
+
+      <Tabs translateY={translateY} />
+    </Container>
+  );
+}
