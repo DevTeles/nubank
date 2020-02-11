@@ -1,6 +1,7 @@
 import { Animated } from 'react-native';
-import styled from 'styled-components/native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -11,7 +12,7 @@ export const Container = styled.View`
 
 export const Content = styled.View`
   flex: 1;
-  max-height: 400px;
+  max-height: 470px;
   z-index: 5;
 `;
 
@@ -20,7 +21,7 @@ export const Card = styled(Animated.View)`
   background: #fff;
   border-radius: 4px;
   margin: 0 20px;
-  height: 100%;
+  height: 80%;
   position: absolute;
   left: 0;
   right: 0;
@@ -48,9 +49,9 @@ export const Title = styled.Text`
 export const Description = styled.Text`
   font-size: 32px;
   margin-top: 3px;
-  color: ${props => (props.iconVisible === 'visibility-off' ? '#eee' : '#333')};
-  background: ${props =>
-    props.iconVisible === 'visibility-off' ? '#eee' : '#fff'};
+  color: ${(props) => (props.iconVisible === 'visibility-off' ? '#eee' : '#333')};
+  background: ${(props) => (props.iconVisible === 'visibility-off' ? '#eee' : '#fff')};
+  opacity: 1;
 `;
 
 export const CardFooter = styled.View`

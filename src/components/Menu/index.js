@@ -15,10 +15,12 @@ import {
   DescBanco,
   Item,
   GroupInfo,
+  SpanText,
+  PerfilDetalhes,
 } from './styles';
 
 export default function Menu({ translateY }) {
-  let base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..';
+  const base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..';
 
   return (
     <Container
@@ -27,7 +29,8 @@ export default function Menu({ translateY }) {
           inputRange: [0, 150],
           outputRange: [0, 1],
         }),
-      }}>
+      }}
+    >
       <Code>
         <QRCode
           size={100}
@@ -54,36 +57,56 @@ export default function Menu({ translateY }) {
 
       <Nav>
         <NavItem>
-          {/* <GroupInfo> */}
-          <Icon name="help-outline" size={20} color="#FFF" />
-          <NavText>Me ajuda</NavText>
-          {/* </GroupInfo> */}
-          {/* <Icon name="keyboard-arrow-right" size={20} color="#FFF" /> */}
-        </NavItem>
-        <NavItem>
-          <Icon name="credit-card" size={20} color="#FFF" />
-          <NavText>Pedir função débito</NavText>
+          <GroupInfo>
+            <Icon name="help-outline" size={20} color="#FFF" />
+            <NavText>Me ajuda</NavText>
+          </GroupInfo>
           <Icon name="keyboard-arrow-right" size={20} color="#FFF" />
         </NavItem>
         <NavItem>
-          <Icon name="person-outline" size={20} color="#FFF" />
-          <NavText>Perfil</NavText>
+          <GroupInfo>
+            <Icon name="credit-card" size={20} color="#FFF" />
+            <NavText>Pedir função débito</NavText>
+          </GroupInfo>
+          <Icon name="keyboard-arrow-right" size={20} color="#FFF" />
         </NavItem>
         <NavItem>
-          <Icon name="settings" size={20} color="#FFF" />
-          <NavText>Configurar NuConta</NavText>
+          <GroupInfo>
+            <Icon name="person-outline" size={20} color="#FFF" />
+            <PerfilDetalhes>
+              <NavText>Perfil</NavText>
+              <SpanText>Nome de preferência, telefone, e-mail</SpanText>
+            </PerfilDetalhes>
+          </GroupInfo>
+          <Icon name="keyboard-arrow-right" size={20} color="#FFF" />
         </NavItem>
         <NavItem>
-          <Icon name="credit-card" size={20} color="#FFF" />
-          <NavText>Configurar Cartão</NavText>
+          <GroupInfo>
+            <Icon name="settings" size={20} color="#FFF" />
+            <NavText>Configurar NuConta</NavText>
+          </GroupInfo>
+          <Icon name="keyboard-arrow-right" size={20} color="#FFF" />
         </NavItem>
         <NavItem>
-          <Icon name="store" size={20} color="#FFF" />
-          <NavText>Pedir conta PJ</NavText>
+          <GroupInfo>
+            <Icon name="credit-card" size={20} color="#FFF" />
+            <NavText>Configurar Cartão</NavText>
+          </GroupInfo>
+          <Icon name="keyboard-arrow-right" size={20} color="#FFF" />
         </NavItem>
         <NavItem>
-          <Icon name="smartphone" size={20} color="#FFF" />
-          <NavText>Configurações do app</NavText>
+          <GroupInfo>
+            <Icon name="store" size={20} color="#FFF" />
+            <NavText>Pedir conta PJ</NavText>
+          </GroupInfo>
+          <Icon name="keyboard-arrow-right" size={20} color="#FFF" />
+        </NavItem>
+        <NavItem>
+          <GroupInfo>
+            <Icon name="smartphone" size={20} color="#FFF" />
+            <NavText>Configurações do app</NavText>
+          </GroupInfo>
+          <Icon name="keyboard-arrow-right" size={20} color="#FFF" />
         </NavItem>
       </Nav>
 

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import { Animated } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Header from '~/components/Header';
-import Tabs from '~/components/Tabs';
 import Menu from '~/components/Menu';
+import Tabs from '~/components/Tabs';
 
 import {
   Container,
@@ -73,26 +72,28 @@ export default function Main() {
 
   return (
     <Container>
-      <Header />
+      <Header translateY={translateY} />
 
       <Content>
         <Menu translateY={translateY} />
 
         <PanGestureHandler
           onGestureEvent={animatedEvent}
-          onHandlerStateChange={onHandlerStateChange}>
+          onHandlerStateChange={onHandlerStateChange}
+        >
           <Card
             style={{
               transform: [
                 {
                   translateY: translateY.interpolate({
                     inputRange: [-350, 0, 500],
-                    outputRange: [-50, 0, 500],
+                    outputRange: [-30, 0, 500],
                     extrapolate: 'clamp',
                   }),
                 },
               ],
-            }}>
+            }}
+          >
             <CardHeader>
               <Icon name="attach-money" size={28} color="#667" />
               <Icon
@@ -110,6 +111,7 @@ export default function Main() {
             </CardContent>
             <CardFooter>
               <Annotation>
+                <Icon name="arrow-upward" size={18} color="#999" />
                 Transferência de R$ 20,00 recebida de Rafael Teles Vital
               </Annotation>
             </CardFooter>

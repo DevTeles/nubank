@@ -1,8 +1,9 @@
 import React from 'react';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, TabsContainer, TabItem, TabText } from './styles';
+import {
+  Container, TabsContainer, TabItem, TabText,
+} from './styles';
 
 export default function Tabs({ translateY }) {
   return (
@@ -22,15 +23,20 @@ export default function Tabs({ translateY }) {
           outputRange: [1, 0],
           extrapolate: 'clamp',
         }),
-      }}>
+      }}
+    >
       <TabsContainer>
         <TabItem>
           <Icon name="person-add" size={24} color="#fff" />
           <TabText>Indicar amigos</TabText>
         </TabItem>
         <TabItem>
-          <Icon name="chat-bubble-outline" size={24} color="#fff" />
+          <Icon name="settings-cell" size={24} color="#fff" />
           <TabText>Recarga de celular</TabText>
+        </TabItem>
+        <TabItem>
+          <Icon name="attach-money" size={24} color="#fff" />
+          <TabText>Cobrar</TabText>
         </TabItem>
         <TabItem>
           <Icon name="arrow-downward" size={24} color="#fff" />
@@ -41,15 +47,15 @@ export default function Tabs({ translateY }) {
           <TabText>Transferir</TabText>
         </TabItem>
         <TabItem>
-          <Icon name="lock" size={24} color="#fff" />
+          <Icon name="build" size={24} color="#fff" />
           <TabText>Ajustar limite</TabText>
         </TabItem>
         <TabItem>
-          <Icon name="lock" size={24} color="#fff" />
+          <Icon name="help-outline" size={24} color="#fff" />
           <TabText>Me ajuda</TabText>
         </TabItem>
         <TabItem>
-          <Icon name="lock" size={24} color="#fff" />
+          <Icon name="payment" size={24} color="#fff" />
           <TabText>Pagar</TabText>
         </TabItem>
         <TabItem>
@@ -57,7 +63,7 @@ export default function Tabs({ translateY }) {
           <TabText>Bloquear cartão</TabText>
         </TabItem>
         <TabItem>
-          <Icon name="lock" size={24} color="#fff" />
+          <Icon name="view-headline" size={24} color="#fff" />
           <TabText>Organizar atalhos</TabText>
         </TabItem>
       </TabsContainer>

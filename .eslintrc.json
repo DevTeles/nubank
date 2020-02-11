@@ -17,8 +17,21 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-native", "jsx-a11y", "import"],
+  "plugins": ["react", "react-native", "jsx-a11y", "import", "import-helpers"],
   "rules": {
+    "import-helpers/order-imports": [
+      "warn",
+      {
+          "newlinesBetween": "always",
+          "groups": [
+              "/^react/",
+              "module",
+              "/^~/",
+              ["parent", "sibling", "index"]
+          ],
+          "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+  ],
     "react/jsx-filename-extension": [
       "error",
       { "extensions": [".js", ".jsx"] }
