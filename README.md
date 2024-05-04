@@ -17,6 +17,7 @@
 - react-native-vector-icons/MaterialIcons;
 - react-hooks.
 - reactotron-react-native.
+- react-navigation
 
 ## Demonstração
 
